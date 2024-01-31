@@ -54,4 +54,3 @@ fixed_icon_size = Vector2i(80, 88)
 script = ExtResource("3_p5e7k")
 
 [connection signal="item_clicked" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_clicked"]
-[connection signal="item_selected" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_selected"]
