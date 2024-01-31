@@ -22,6 +22,9 @@ func _ready():
 		.setData(pileOfCards, BOARD_SIZE_LENGTH, BOARD_SIZE_HEIGHT, 
 		currentDeckAmount)
 	
+	# Create and start timer
+	
+	
 func _process(delta):
 	pass
 	

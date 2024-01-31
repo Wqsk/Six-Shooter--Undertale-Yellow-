@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdx5x62em2m7u"]
+
+[ext_resource type="Script" path="res://scripts/ButtonController.gd" id="1_8ojc0"]
+
+[node name="MenuScene" type="Node2D"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "Six-Shooter"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/VBoxContainer2/MarginContainer2"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 15
+text = "Based on the minigame Six-Shooter from Undertale Yellow"
+scroll_active = false
+autowrap_mode = 2
+
+[node name="ButtonController" type="MarginContainer" parent="CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+script = ExtResource("1_8ojc0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer2/ButtonController"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="start" type="Button" parent="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="help" type="Button" parent="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer"]
+layout_mode = 2
+text = "Help
+"
+
+[node name="quit" type="Button" parent="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer/start" to="CenterContainer/VBoxContainer2/ButtonController" method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer/help" to="CenterContainer/VBoxContainer2/ButtonController" method="_on_help_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/ButtonController/VBoxContainer/quit" to="CenterContainer/VBoxContainer2/ButtonController" method="_on_quit_pressed"]
