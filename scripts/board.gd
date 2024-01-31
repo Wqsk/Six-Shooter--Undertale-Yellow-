@@ -7,6 +7,7 @@ var BOARD_SIZE
 var currentDeckAmount
 var icon
 var prevItemSelectedIndex
+signal boardUpdated
 
 func setData(pileOfCards:Array[int], BOARD_LENGTH, BOARD_HEIGHT, 
 		currDeckAmount):
@@ -21,15 +22,23 @@ func addIconItem(iconPath):
 		add_icon_item(load(iconPath))
 	
 func _on_item_clicked(index, at_position, mouse_button_index):
-	var otherSelectedItemIndex
 	var selectedItems
 	if prevItemSelectedIndex != null:
 		# User clicked same tile. Don't do anything besides unselecting.
+		# Or user clicked a highlighted (darkened) tile.
 		if prevItemSelectedIndex == index || isHighlighted(index):
+			deselect(index)
 			prevItemSelectedIndex = null
 			unhighlightAll()
 			return
-			
+		
+		# User clicked on a tile that was different than the other.
+		if get_item_icon(index) != get_item_icon(prevItemSelectedIndex):
+			deselect(index)
+			prevItemSelectedIndex = null
+			unhighlightAll()
+			return
+		
 		if prevItemSelectedIndex > index:
 			remove_item(prevItemSelectedIndex)
 			remove_item(index)
@@ -42,6 +51,8 @@ func _on_item_clicked(index, at_position, mouse_button_index):
 	else:
 		prevItemSelectedIndex = index
 		highlightNeighbors(index)
+	get_tree().call_group("DeckCardAmount", "updateDeckAmount", currentDeckAmount)
+	print("emitted") #test
 
 func isHighlighted(index):
 	# if item at index has not changed from default, then it is not highlighted.
@@ -56,13 +67,13 @@ func getNeighbors(index):
 		return 0
 
 func unhighlightAll():
-	for cards in range(BOARD_SIZE):
+	for cards in range(item_count):
 		set_item_icon_modulate(cards, Color(1,1,1))
 		
 func highlightNeighbors(index):
 	var edgeValue = getNeighbors(index)
 	print("Edge Value: " + str(edgeValue)) #test
-	for cards in range(BOARD_SIZE):
+	for cards in range(item_count):
 		# Top and Bottom
 		if cards == index || cards+5 == index || cards-5 == index:
 			pass

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy25iccya2cba"]
+[gd_scene load_steps=5 format=3 uid="uid://cy25iccya2cba"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dqcew"]
 [ext_resource type="Script" path="res://scripts/Board Controller.gd" id="2_pnxu5"]
+[ext_resource type="Script" path="res://scripts/DeckCardAmount.gd" id="2_rgq76"]
 [ext_resource type="Script" path="res://scripts/board.gd" id="3_p5e7k"]
 
 [node name="main" type="Node2D"]
@@ -13,7 +14,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DeckCardAmount" type="RichTextLabel" parent="Text Controller"]
+[node name="DeckCardAmount" type="RichTextLabel" parent="Text Controller" groups=["DeckCardAmount"]]
 layout_mode = 0
 offset_left = 38.0
 offset_right = 141.0
@@ -22,6 +23,7 @@ theme_override_font_sizes/normal_font_size = 60
 text = "16"
 scroll_active = false
 text_direction = 1
+script = ExtResource("2_rgq76")
 
 [node name="Board Controller" type="Control" parent="."]
 layout_mode = 3
