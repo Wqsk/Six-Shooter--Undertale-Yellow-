@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy25iccya2cba"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_dqcew"]
+[ext_resource type="Script" path="res://scripts/Board Controller.gd" id="2_pnxu5"]
+[ext_resource type="Script" path="res://scripts/board.gd" id="3_p5e7k"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_dqcew")
+
+[node name="Text Controller" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DeckCardAmount" type="RichTextLabel" parent="Text Controller"]
+layout_mode = 0
+offset_left = 38.0
+offset_right = 141.0
+offset_bottom = 81.0
+theme_override_font_sizes/normal_font_size = 60
+text = "16"
+scroll_active = false
+text_direction = 1
+
+[node name="Board Controller" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_pnxu5")
+
+[node name="CenterContainer" type="CenterContainer" parent="Board Controller"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 480.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Board Controller/CenterContainer"]
+custom_minimum_size = Vector2(640, 480)
+layout_mode = 2
+theme_override_constants/margin_left = 127
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 127
+
+[node name="board" type="ItemList" parent="Board Controller/CenterContainer/MarginContainer"]
+layout_mode = 2
+focus_mode = 0
+allow_search = false
+max_columns = 5
+same_column_width = true
+fixed_column_width = 70
+icon_mode = 0
+fixed_icon_size = Vector2i(80, 88)
+script = ExtResource("3_p5e7k")
+
+[connection signal="item_clicked" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_clicked"]
+[connection signal="item_selected" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_selected"]
