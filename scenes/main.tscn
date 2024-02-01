@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy25iccya2cba"]
+[gd_scene load_steps=7 format=3 uid="uid://cy25iccya2cba"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dqcew"]
 [ext_resource type="Script" path="res://scripts/Board Controller.gd" id="2_pnxu5"]
 [ext_resource type="Script" path="res://scripts/DeckCardAmount.gd" id="2_rgq76"]
 [ext_resource type="Script" path="res://scripts/board.gd" id="3_p5e7k"]
 [ext_resource type="Script" path="res://scripts/Timer.gd" id="3_xqeb4"]
+[ext_resource type="AudioStream" uid="uid://d36wuhmkvvwgp" path="res://music/060---six-shooter.mp3" id="6_koutq"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_dqcew")
@@ -66,5 +67,9 @@ fixed_column_width = 70
 icon_mode = 0
 fixed_icon_size = Vector2i(80, 88)
 script = ExtResource("3_p5e7k")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_koutq")
+autoplay = true
 
 [connection signal="item_clicked" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_clicked"]
