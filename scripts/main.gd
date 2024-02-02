@@ -60,3 +60,6 @@ func populatePileOfCards(MAX_CARDS, AMOUNT_OF_CARD_TYPES):
 		for i in range(MAX_CARDS/AMOUNT_OF_CARD_TYPES):
 			# so that var i wont stagnate at R[1,2,3,4,5], multiply
 			pileOfCards[i+types*AMOUNT_OF_CARD_TYPES] = types
+			
+func addMusicVolume(adder):
+	$AudioStreamPlayer.volume_db += adder

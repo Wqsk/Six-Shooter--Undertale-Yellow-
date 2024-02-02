@@ -10,9 +10,43 @@ var prevItemSelectedIndex
 
 func checkGameState():
 	if item_count <= 0:
-		print("supposed to win") #test
 		get_tree().call_group("win", "setVisibility", true)
+	else:
+		var lost = true
+		for card in range(item_count):
+			var edgeValue = getNeighbors(card)
+			
+			var leftCard = card-1
+			var leftTopCorner = card-6
+			var leftBottomCorner = card+4
+			var rightCard = card+1
+			var rightTopCorner = card-4
+			var rightBottomCorner = card+6
+			
+			
+			if edgeValue == 1:
+				leftCard = rightCard
+				leftBottomCorner = rightCard
+				leftTopCorner = rightCard
+			elif edgeValue == 2:
+				rightCard = leftCard
+				rightBottomCorner = leftCard
+				rightTopCorner = leftCard
+
+			elif get_item_icon(card) == get_item_icon(leftCard) ||\
+				get_item_icon(card) == get_item_icon(leftTopCorner) ||\
+				get_item_icon(card) == get_item_icon(leftBottomCorner) ||\
+				get_item_icon(card) == get_item_icon(rightCard) ||\
+				get_item_icon(card) == get_item_icon(rightTopCorner) ||\
+				get_item_icon(card) == get_item_icon(rightBottomCorner):
+				lost = false
 	
+		if lost:
+			get_tree().call_group("lose", "setVisibility", true)
+
+func inBounds(index):
+	return index > 0 || index < item_count
+
 func setData(pileOfCards:Array[int], BOARD_LENGTH, BOARD_HEIGHT, 
 		currDeckAmount):
 	deck = pileOfCards

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cy25iccya2cba"]
+[gd_scene load_steps=12 format=3 uid="uid://cy25iccya2cba"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_dqcew"]
 [ext_resource type="Script" path="res://scripts/Board Controller.gd" id="2_pnxu5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/Main Menu.gd" id="8_1r5tk"]
 [ext_resource type="Script" path="res://scripts/Win Screen.gd" id="8_ia12p"]
 [ext_resource type="Script" path="res://scripts/Reset.gd" id="9_gx8mx"]
+[ext_resource type="Script" path="res://scripts/Loss Screen.gd" id="11_veu41"]
 
 [node name="main" type="Node2D" groups=["main"]]
 script = ExtResource("1_dqcew")
@@ -166,7 +167,74 @@ layout_mode = 2
 text = "Reset"
 script = ExtResource("9_gx8mx")
 
+[node name="Loss Screen" type="Window" parent="." groups=["lose"]]
+initial_position = 4
+size = Vector2i(450, 220)
+visible = false
+unresizable = true
+borderless = true
+transparent = true
+min_size = Vector2i(450, 220)
+script = ExtResource("11_veu41")
+
+[node name="CenterContainer2" type="CenterContainer" parent="Loss Screen"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 55.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Loss Screen/CenterContainer2"]
+layout_mode = 2
+
+[node name="lossText" type="RichTextLabel" parent="Loss Screen/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "YOU LOSE"
+fit_content = true
+autowrap_mode = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="Loss Screen/CenterContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimeText" type="RichTextLabel" parent="Loss Screen/CenterContainer2/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "0:0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Loss Screen"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="Loss Screen/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Loss Screen/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Main Menu" type="Button" parent="Loss Screen/MarginContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Main Menu"
+script = ExtResource("8_1r5tk")
+
+[node name="Reset" type="Button" parent="Loss Screen/MarginContainer/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Reset"
+script = ExtResource("9_gx8mx")
+
 [connection signal="item_clicked" from="Board Controller/CenterContainer/MarginContainer/board" to="Board Controller/CenterContainer/MarginContainer/board" method="_on_item_clicked"]
 [connection signal="pressed" from="Button Controller/Reset" to="Button Controller" method="_on_reset_pressed"]
 [connection signal="pressed" from="Win Screen/MarginContainer/CenterContainer/HBoxContainer/Main Menu" to="Win Screen/MarginContainer/CenterContainer/HBoxContainer/Main Menu" method="_on_pressed"]
 [connection signal="pressed" from="Win Screen/MarginContainer/CenterContainer/HBoxContainer/Reset" to="Win Screen/MarginContainer/CenterContainer/HBoxContainer/Reset" method="_on_pressed"]
+[connection signal="pressed" from="Loss Screen/MarginContainer/CenterContainer/HBoxContainer/Main Menu" to="Loss Screen/MarginContainer/CenterContainer/HBoxContainer/Main Menu" method="_on_pressed"]
+[connection signal="pressed" from="Loss Screen/MarginContainer/CenterContainer/HBoxContainer/Reset" to="Loss Screen/MarginContainer/CenterContainer/HBoxContainer/Reset" method="_on_pressed"]

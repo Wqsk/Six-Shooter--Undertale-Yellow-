@@ -24,5 +24,5 @@ func updateTimer(mins, secs):
 	timeText = str(mins) + ":" + str(secs)
 	text = timeText
 
-func giveTime():
-	get_tree().call_group("win", "setTime", timeText)
+func giveTime(who):
+	get_tree().call_group(who, "setTime", timeText)
