@@ -30,5 +30,9 @@ func populateBoard(values:Array[Array]):
 			else:
 				icon = null	
 			board.addIconItem(icon)
+	
+func clearBoard():
+	for cards in range($CenterContainer/MarginContainer/board.item_count):
+		$CenterContainer/MarginContainer/board.remove_item(0)
 
 	

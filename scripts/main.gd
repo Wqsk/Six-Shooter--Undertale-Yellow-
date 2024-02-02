@@ -9,6 +9,9 @@ var board:Array[Array]
 var currentDeckAmount:int = 16
 
 func _ready():
+	startGame()
+
+func startGame():
 	# Create pile of cards
 	populatePileOfCards(MAX_CARDS, AMOUNT_OF_CARD_TYPES)
 	pileOfCards.shuffle()
@@ -21,9 +24,6 @@ func _ready():
 	$"Board Controller/CenterContainer/MarginContainer/board"\
 		.setData(pileOfCards, BOARD_SIZE_LENGTH, BOARD_SIZE_HEIGHT, 
 		currentDeckAmount)
-	
-	# Create and start timer
-	
 	
 func _process(delta):
 	pass

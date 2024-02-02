@@ -3,6 +3,7 @@ extends RichTextLabel
 var time_elasped := 0.0
 var minutes
 var seconds
+var timeText
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -20,4 +21,8 @@ func updateTimer(mins, secs):
 		mins = "00"
 	mins = int(mins)
 	secs = int(secs)
-	text = str(mins) + ":" + str(secs)
+	timeText = str(mins) + ":" + str(secs)
+	text = timeText
+
+func giveTime():
+	get_tree().call_group("win", "setTime", timeText)

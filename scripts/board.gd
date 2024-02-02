@@ -7,8 +7,12 @@ var BOARD_SIZE
 var currentDeckAmount
 var icon
 var prevItemSelectedIndex
-signal boardUpdated
 
+func checkGameState():
+	if item_count <= 0:
+		print("supposed to win") #test
+		get_tree().call_group("win", "setVisibility", true)
+	
 func setData(pileOfCards:Array[int], BOARD_LENGTH, BOARD_HEIGHT, 
 		currDeckAmount):
 	deck = pileOfCards
@@ -52,7 +56,7 @@ func _on_item_clicked(index, at_position, mouse_button_index):
 		prevItemSelectedIndex = index
 		highlightNeighbors(index)
 	get_tree().call_group("DeckCardAmount", "updateDeckAmount", currentDeckAmount)
-	print("emitted") #test
+	checkGameState()
 
 func isHighlighted(index):
 	# if item at index has not changed from default, then it is not highlighted.
@@ -122,4 +126,5 @@ func getIconFromValue(value:int):
 		icon = "res://sprites/E.png"
 	else:
 		icon = null
+
 
