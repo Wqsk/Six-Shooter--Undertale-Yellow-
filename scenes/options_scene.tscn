@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://gl0e1i8ktvux"]
+
+[ext_resource type="Script" path="res://scripts/mainMenu.gd" id="1_irmcn"]
+
+[node name="options_scene" type="Node2D"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(200, 400)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Music" type="RichTextLabel" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+fit_content = true
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+value = 50.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="keybind_reset" type="RichTextLabel" parent="CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Reset Keybind
+"
+fit_content = true
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "R
+"
+
+[node name="mainMenu" type="Button" parent="."]
+offset_left = 461.0
+offset_top = 424.0
+offset_right = 628.0
+offset_bottom = 471.0
+theme_override_font_sizes/font_size = 25
+text = "Back to main"
+script = ExtResource("1_irmcn")
+
+[connection signal="pressed" from="mainMenu" to="mainMenu" method="_on_pressed"]
