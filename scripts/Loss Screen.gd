@@ -14,7 +14,6 @@ func setVisibility(input : bool):
 	if input:
 		visible = true
 		get_tree().call_group("timer", "giveTime", "lose")
-		get_tree().call_group("main", "addMusicVolume", -10)
 		
 func setTime(time):
 	$CenterContainer2/VBoxContainer/CenterContainer/TimeText.text = time

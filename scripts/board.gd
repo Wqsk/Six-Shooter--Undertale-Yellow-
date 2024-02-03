@@ -22,6 +22,8 @@ func checkGameState():
 			var rightCard = card+1
 			var rightTopCorner = card-4
 			var rightBottomCorner = card+6
+			var topCard = card+5
+			var bottomCard = card-5
 			
 			
 			if edgeValue == 1:
@@ -33,16 +35,21 @@ func checkGameState():
 				rightBottomCorner = leftCard
 				rightTopCorner = leftCard
 
-			elif get_item_icon(card) == get_item_icon(leftCard) ||\
+			if get_item_icon(card) == get_item_icon(leftCard) ||\
 				get_item_icon(card) == get_item_icon(leftTopCorner) ||\
 				get_item_icon(card) == get_item_icon(leftBottomCorner) ||\
 				get_item_icon(card) == get_item_icon(rightCard) ||\
 				get_item_icon(card) == get_item_icon(rightTopCorner) ||\
-				get_item_icon(card) == get_item_icon(rightBottomCorner):
+				get_item_icon(card) == get_item_icon(rightBottomCorner) ||\
+				get_item_icon(card) == get_item_icon(topCard) ||\
+				get_item_icon(card) == get_item_icon(bottomCard):
 				lost = false
 	
 		if lost:
+			get_tree().call_group("main", "addMusicVolume", -10)
+			await get_tree().create_timer(1.5).timeout
 			get_tree().call_group("lose", "setVisibility", true)
+			return
 
 func inBounds(index):
 	return index > 0 || index < item_count
@@ -60,6 +67,10 @@ func addIconItem(iconPath):
 		add_icon_item(load(iconPath))
 	
 func _on_item_clicked(index, at_position, mouse_button_index):
+	# Only left click and right click will click
+	if mouse_button_index > 2:
+		return
+	
 	var selectedItems
 	if prevItemSelectedIndex != null:
 		# User clicked same tile. Don't do anything besides unselecting.

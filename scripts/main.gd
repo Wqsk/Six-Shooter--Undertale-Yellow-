@@ -6,12 +6,17 @@ var board:Array[Array]
 @export var AMOUNT_OF_CARD_TYPES:int = 6
 @export var BOARD_SIZE_LENGTH = 5
 @export var BOARD_SIZE_HEIGHT = 4
-var currentDeckAmount:int = 16
+var currentDeckAmount:int
 
 func _ready():
 	startGame()
 
 func startGame():
+	if MAX_CARDS > BOARD_SIZE_HEIGHT * BOARD_SIZE_LENGTH:
+		currentDeckAmount = MAX_CARDS - \
+			(BOARD_SIZE_HEIGHT * BOARD_SIZE_LENGTH)
+	else:
+		currentDeckAmount = 0
 	# Create pile of cards
 	populatePileOfCards(MAX_CARDS, AMOUNT_OF_CARD_TYPES)
 	pileOfCards.shuffle()
@@ -24,6 +29,9 @@ func startGame():
 	$"Board Controller/CenterContainer/MarginContainer/board"\
 		.setData(pileOfCards, BOARD_SIZE_LENGTH, BOARD_SIZE_HEIGHT, 
 		currentDeckAmount)
+		
+	$"Text Controller/DeckCardAmount".\
+		updateDeckAmount(currentDeckAmount)
 	
 func _process(delta):
 	pass
@@ -56,10 +64,10 @@ func populatePileOfCards(MAX_CARDS, AMOUNT_OF_CARD_TYPES):
 	pileOfCards.resize(MAX_CARDS)
 	# For each type of card, iterate through so that there are that many types
 	# of cards while still having an even distribution.
-	for types in range(AMOUNT_OF_CARD_TYPES):
-		for i in range(MAX_CARDS/AMOUNT_OF_CARD_TYPES):
+	for i in range(MAX_CARDS/AMOUNT_OF_CARD_TYPES):
+		for types in range(AMOUNT_OF_CARD_TYPES):
 			# so that var i wont stagnate at R[1,2,3,4,5], multiply
-			pileOfCards[i+types*AMOUNT_OF_CARD_TYPES] = types
+			pileOfCards[types+i*AMOUNT_OF_CARD_TYPES] = types
 			
 func addMusicVolume(adder):
 	$AudioStreamPlayer.volume_db += adder
